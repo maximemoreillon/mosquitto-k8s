@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+data:
+  mosquitto.conf: |
+
+    persistence true
+    persistence_location /mosquitto/data/
+
+    log_dest stdout
+
+    # Enforce user authentication
+    # Enforce user authentication
+    allow_anonymous false
+    password_file /mosquitto/config/passwd
+
+    # Default listener for direct MQTT traffic
+    # Default listener for direct MQTT traffic
+    listener 1883
+    protocol mqtt
+
+    # Listener for MQTT traffic over Websockets
+    # Listener for MQTT traffic over Websockets
+    listener 9001
+    protocol websockets
+  passwd: |
+    example:$6$OlFZo8vTPy2xmhCv$s2HNta0sPPhbnSqAnsq43xiuc5c41nos4tIL6qagVkjG6THbYWVlSigkLkfbuUKufBmt9yM7MIQkCbiZCpix/w==
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
